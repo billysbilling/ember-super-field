@@ -1,0 +1,14 @@
+<div class="popover-body list">
+    {{#if view.type.isLoaded}}
+        {{#if view.type.content.length}}
+            {{collection listViewClass contentBinding="view.type.content" itemViewClass="view.type.optionViewClass"}}
+        {{else}}
+            <div class="status">{{view.type.noOptionsFoundText}}</div>
+        {{/if}}
+    {{else}}
+        <div class="status">{{t loading_ellipsis}}</div>
+    {{/if}}
+</div>
+{{#if view.type.create}}
+    {{view createViewClass}}
+{{/if}}

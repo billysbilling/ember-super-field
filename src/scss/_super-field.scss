@@ -1,0 +1,111 @@
+@mixin super-field {
+    .super-field {
+        &.has-string-value {
+            input {
+                background-color: lighten($green-light, 20%);
+            }
+        }
+    }
+    
+    .super-field-selector {
+        padding: $standard-border-radius 0px;
+        
+        &.has-create {
+            padding-bottom: 0px;
+        }
+    
+        &.above {
+            &.has-create {
+                .notch {
+                    border-top-color: $background-gray;
+                }
+            }
+        }
+    
+        .list {
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+    
+        .option {
+            $image-size: 16px;
+            $option-padding: 5px;
+            
+            cursor: pointer;
+            padding: $option-padding;
+            border-bottom: 1px solid $background-gray;
+            
+            &:last-of-type {
+                border-bottom-color: #fff;
+                
+                &:hover, &.highlighted {
+                    border-bottom-color: $blue-xlight;
+                }
+            }
+    
+            &:hover, &.highlighted {
+                background-color: $blue-xlight;
+            }
+            
+            .name {
+                @include ellipsis;
+                line-height: $tight-line-height;
+                height: $tight-line-height;
+            }
+            
+            .meta {
+                @include ellipsis;
+                color: $blue-gray-light;
+                @include small-font;
+                line-height: $small-tight-line-height;
+                height: $small-tight-line-height;
+                @include ellipsis;
+            }
+            
+            .image {
+                position: absolute;
+                top: $option-padding;
+                left: $option-padding + ($line-height - $image-size)/2;
+                
+                img {
+                    max-width: 100%;
+                    max-height: 100%;
+                }
+            }
+            
+            .image-content {
+                padding-left: $image-size + 2*$option-padding;
+            }
+        }
+        
+        .create {
+            cursor: pointer;
+            padding:  0px 5px;
+            background: $background-gray;
+            border-top: 1px solid $border-gray;
+            @include border-bottom-radius(2px);
+            
+            svg {
+                float: left;
+                width: 12px;
+                height: 12px;
+                margin-top: ($line-height - 12px)/2;
+                margin-right: 5px;
+            }
+            
+            .svg-plus {
+                fill: $green;
+            }
+    
+            &:hover, &.highlighted {
+                background-color: $blue-xlight;
+            }
+        }
+        
+        .status {
+            padding: 0px 5px;
+            color: $blue-gray-light;
+        }
+        
+    }
+}
