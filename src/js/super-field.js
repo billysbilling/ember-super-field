@@ -30,9 +30,9 @@ module.exports = require('ember-text-field').extend({
     },
 
     superFieldRecordWillChange: function() {
-        var r = this.get('record');
-        if (r) {
+        if (this._recordStringValueBinding) {
             this._recordStringValueBinding.disconnect(this);
+            this._recordStringValueBinding = null;
         }
     }.observesBefore('record'),
 
