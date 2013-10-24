@@ -37,9 +37,10 @@ module.exports = require('ember-text-field').extend({
     }.observesBefore('record'),
 
     superFieldRecordDidChange: function() {
-        var r = this.get('record');
-        if (r) {
-            this._recordStringValueBinding = this.bind('stringValue', 'record.'+ this.get('stringName'));
+        var r = this.get('record'),
+            stringName = this.get('stringName');
+        if (r && stringName) {
+            this._recordStringValueBinding = this.bind('stringValue', 'record.'+ stringName);
         }
     }.observes('record').on('init'),
     
