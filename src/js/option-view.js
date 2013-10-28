@@ -10,10 +10,6 @@ module.exports = require('ember-lazy-list').LazyItemView.extend({
         return (content.get('isLoaded') !== false && content === this.get('parentView.parentView.highlightedOption'));
     }.property('parentView.parentView.highlightedOption'),
 
-    mouseDown: function() {
-        return false;
-    },
-
     mouseUp: function() {
         this.get('parentView.parentView').selectOption(this.get('content'));
     },

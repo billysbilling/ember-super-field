@@ -5,7 +5,7 @@ module.exports = Em.View.extend({
     
     classNameBindings: ['parentView.createIsHighlighted:highlighted'],
 
-    click: function() {
+    mouseUp: function() {
         this.get('parentView.field').create();
     },
 

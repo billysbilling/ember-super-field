@@ -19,6 +19,10 @@ module.exports = require('ember-popover').extend({
     
     createIsHighlighted: false,
 
+    mouseDown: function(e) {
+        return false;
+    },
+
     didPressUp: function() {
         if (this.get('createIsHighlighted')) {
             this.highlightOptionByIndex(this.get('type.content.length')-1);
