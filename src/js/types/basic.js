@@ -1,3 +1,5 @@
+var t = require('../i18n').t;
+
 module.exports = Em.Object.extend({
     inputValuePath: 'name',
 
@@ -14,13 +16,13 @@ module.exports = Em.Object.extend({
     createTip: function() {
         var v = this.get('field.inputValue');
         if (v) {
-            return t('ui.fields.superfield.create_model', {model: v});
+            return t('create_model', {model: v});
         } else {
-            return t('ui.fields.superfield.create_new');
+            return t('create_new');
         }
     }.property('field.inputValue'),
     
-    noOptionsFoundText: t('ui.fields.superfield.no_options_found'),
+    noOptionsFoundText: t('no_options_found'),
     optionHeight: 27,
     optionViewClass: require('../option-view'),
 

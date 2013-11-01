@@ -1,0 +1,1 @@
+module.exports = require('i18n').module('ember_super_field', require.resolve('../locales'));

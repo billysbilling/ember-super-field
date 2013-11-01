@@ -1,4 +1,5 @@
-var BasicType = require('./types/basic');
+var i18n = require('./i18n'),
+    BasicType = require('./types/basic');
 
 module.exports = require('ember-text-field').extend({
     classNames: ['super-field'],
@@ -259,3 +260,5 @@ module.exports.types = {
 };
 
 module.exports.OptionView = require('./option-view');
+
+module.exports.lang = i18n.lang;

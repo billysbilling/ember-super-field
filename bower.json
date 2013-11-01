@@ -4,7 +4,11 @@
   "homepage": "https://github.com/billysbilling/ember-super-field",
   "main": "src/js/super-field.js",
   "billy-builder": {
-    "include": ["src/js", "src/templates"]
+    "include": [
+      "src/js",
+      "src/locales",
+      "src/templates"
+    ]
   },
   "license": "MIT",
   "ignore": [
@@ -16,9 +20,10 @@
   ],
   "dependencies": {
     "ember": "billysbilling/bower-ember#master",
-    "style-guide": "billysbilling/style-guide#master",
-    "ember-text-field": "billysbilling/ember-text-field#master",
+    "ember-lazy-list": "billysbilling/ember-lazy-list#master",
     "ember-popover": "billysbilling/ember-popover#master",
-    "ember-lazy-list": "billysbilling/ember-lazy-list#master"
+    "ember-text-field": "billysbilling/ember-text-field#master",
+    "i18n": "billysbilling/i18n#master",
+    "style-guide": "billysbilling/style-guide#master"
   }
 }
