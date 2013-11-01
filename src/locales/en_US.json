@@ -1,5 +1,6 @@
 {
     "create_model": "Create \"{{model}}\"",
     "create_new": "Create new",
-    "no_options_found": "No options found."
+    "no_options_found": "No options found.",
+    "loading_ellipsis": "Loading..."
 }
