@@ -12,6 +12,7 @@ module.exports = require('./basic').extend({
             return;
         }
         this.set('q', q);
+        this.set('isLoading', true);
         if (instant || BD.store.allOfTypeIsLoaded(this.get('modelClass'))) {
             this.updateContent();
         } else {
@@ -35,6 +36,9 @@ module.exports = require('./basic').extend({
             self.set('content', content);
         }
         content.promise.then(function() {
+            //TODO: What happens if two requests are running simultaneously? The first one should probably be aborted
+            self.set('isLoading', false);
+            self.trigger('didLoad');
             var oldContent = self.get('content');
             if (content !== oldContent) {
                 if (oldContent) {

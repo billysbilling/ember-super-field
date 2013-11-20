@@ -2,5 +2,6 @@
     "create_model": "Opret \"{{model}}\"",
     "create_new": "Opret ny",
     "no_options_found": "Ingen valgmuligheder fundet.",
-    "loading_ellipsis": "Henter..."
+    "loading_ellipsis": "Henter...",
+    "no_single_value_found": "Vi kunne ikke finde et match på din søgning."
 }

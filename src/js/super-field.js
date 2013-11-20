@@ -1,4 +1,5 @@
 var i18n = require('./i18n'),
+    t = i18n.t,
     BasicType = require('./types/basic');
 
 module.exports = require('ember-text-field').extend({
@@ -10,6 +11,8 @@ module.exports = require('ember-text-field').extend({
 
     allowKeyInput: true,
     
+    autoSelectOnBlur: false,
+
     init: function() {
         this.initType();
         this._super();
@@ -111,11 +114,31 @@ module.exports = require('ember-text-field').extend({
     }.observes('inputValue'),
     didBlur: function() {
         this._super();
-        if (Em.isEmpty(this.get('value')) && !this.get('allowStringValue')) {
-            this.set('inputValue', '');
+        //If the value is empty and allowStringValue == false, then we need to handle the inputValue somehow if it is set
+        if (Em.isEmpty(this.get('value')) && !this.get('allowStringValue') && !Em.isEmpty(this.get('inputValue'))) {
+            var type = this.get('type');
+            if (this.get('autoSelectOnBlur')) {
+                //If autoSelectOnBlur == true we either select the one and only option, or add an error to the field
+                if (type.get('isLoading')) {
+                    type.one('didLoad', this, this.autoSelect);
+                } else {
+                    this.autoSelect();
+                }
+            } else {
+                //Otherwise we clear the inputValue
+                this.set('inputValue', '');
+            }
         }
     },
 
+    autoSelect: function() {
+        var content = this.get('type.content');
+        if (content.get('length') === 1) {
+            this.set('value', content.get('firstObject'));
+        } else {
+            this.set('error', t('no_single_value_found'));
+        }
+    },
 
     //DOM events
     didInsertElement: function() {

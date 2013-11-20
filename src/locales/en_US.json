@@ -2,5 +2,6 @@
     "create_model": "Create \"{{model}}\"",
     "create_new": "Create new",
     "no_options_found": "No options found.",
-    "loading_ellipsis": "Loading..."
+    "loading_ellipsis": "Loading...",
+    "no_single_value_found": "We could not find a match for your search."
 }

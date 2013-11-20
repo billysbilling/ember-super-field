@@ -1,6 +1,6 @@
 var t = require('../i18n').t;
 
-module.exports = Em.Object.extend({
+module.exports = Em.Object.extend(Em.Evented, {
     inputValuePath: 'name',
 
     iconPath: null,
@@ -8,6 +8,7 @@ module.exports = Em.Object.extend({
     selectorMinWidth: 200,
     
     content: null,
+    isLoading: false,
     isLoaded: true,
     setQ: Em.K,
     resetContent: Em.K,
