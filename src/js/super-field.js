@@ -1,5 +1,5 @@
-var i18n = require('./i18n'),
-    t = i18n.t,
+var i18nContext = require('./i18n-context'),
+    t = i18nContext.t,
     BasicType = require('./types/basic');
 
 module.exports = require('ember-text-field').extend({
@@ -285,4 +285,9 @@ module.exports.types = {
 
 module.exports.OptionView = require('./option-view');
 
-module.exports.lang = i18n.lang;
+module.exports.locale = i18nContext.locale;
+
+module.exports.lang = function() {
+    console.warn('.lang() is deprecated. Use .locale() instead');
+    return i18nContext.locale.apply(null, arguments);
+};
