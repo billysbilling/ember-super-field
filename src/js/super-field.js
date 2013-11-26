@@ -173,8 +173,6 @@ module.exports = require('ember-text-field').extend({
             case $.keyCode.ESCAPE:
                 this.hideSelector();
                 break;
-            case $.keyCode.TAB:
-                this.hideSelector();
                 break;
             case $.keyCode.UP:
                 this.didPressUp();
@@ -182,6 +180,7 @@ module.exports = require('ember-text-field').extend({
             case $.keyCode.DOWN:
                 this.didPressDown();
                 break;
+            case $.keyCode.TAB:
             case $.keyCode.ENTER:
                 this.didPressEnter();
                 break;
