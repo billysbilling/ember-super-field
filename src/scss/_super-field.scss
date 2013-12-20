@@ -55,7 +55,7 @@
             
             .meta {
                 @include ellipsis;
-                color: $blue-gray-light;
+                color: $blue-gray;
                 @include small-font;
                 line-height: $small-tight-line-height;
                 height: $small-tight-line-height;
@@ -104,7 +104,7 @@
         
         .status {
             padding: 0px 5px;
-            color: $blue-gray-light;
+            color: $blue-gray;
         }
         
     }
