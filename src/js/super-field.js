@@ -4,13 +4,14 @@ var i18nContext = require('./i18n-context'),
 
 module.exports = require('ember-text-field').extend({
     classNames: ['super-field'],
-    
+
     classNameBindings: ['hasStringValue', 'hasStringValue:has-value'],
-    
+
     autocomplete: 'off',
 
     allowKeyInput: true,
-    
+    showSelectorOnDownArrow: true,
+
     autoSelectOnBlur: false,
 
     init: function() {
@@ -47,16 +48,16 @@ module.exports = require('ember-text-field').extend({
             this._recordStringValueBinding = this.bind('stringValue', 'record.'+ stringName);
         }
     }.observes('record').on('init'),
-    
+
     allowStringValue: false,
     stringName: null,
     stringValue: '',
     hasStringValue: function() {
         return (this.get('stringValue') && !this.get('hasFocus'));
     }.property('hasFocus', 'stringValue'),
-    
+
     autoSelectIfOne: false,
-    
+
     initType: function() {
         var type = this.get('type');
         if (typeof type === 'string') {
@@ -69,16 +70,16 @@ module.exports = require('ember-text-field').extend({
         type.set('field', this);
         this.set('type', type);
     },
-    
+
     query: null,
-    
+
     icon: function() {
         return this.get('value.' + this.get('type.iconPath'));
     }.property('value'),
-    
+
     selectOnFocus: true,
     picker1Icon: 'icons/caret-down',
-    
+
     didClickPicker1: function() {
         if (this.get('selector')) {
             this.hideSelector();
@@ -97,7 +98,7 @@ module.exports = require('ember-text-field').extend({
         var inputValuePath = this.get('type.inputValuePath');
         return Em.isEmpty(value) ? this.get('inputValue') : (inputValuePath ? value.get(inputValuePath) : '');
     },
-    
+
     //Value handling
     superFieldValueDidChange: function() {
         if (this.get('value')) {
@@ -220,7 +221,7 @@ module.exports = require('ember-text-field').extend({
         var selector = this.get('selector');
         if (selector) {
             selector.didPressDown();
-        } else {
+        } else if (this.get('showSelectorOnDownArrow')) {
             this.showSelector();
             this.get('type').setQ(this.get('inputValue'), true);
             this.get('selector').highlightOptionByIndex(0);
@@ -232,7 +233,7 @@ module.exports = require('ember-text-field').extend({
             selector.didPressEnter();
         }
     },
-    
+
     //Selector
     showSelector: function() {
         var self = this,
@@ -260,7 +261,7 @@ module.exports = require('ember-text-field').extend({
         this.sendAction('didSelect', option);
     },
 
-    
+
     //Create
     create: function() {
         var self = this,
