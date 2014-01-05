@@ -200,7 +200,7 @@ module.exports = require('ember-text-field').extend({
                     if (hasModifier) {
                         break;
                     }
-                    this.set('value', null);
+                    this.selectOption(null);
                     if (!this.get('selector')) {
                         this.get('type').resetContent();
                         this.showSelector();
@@ -270,10 +270,8 @@ module.exports = require('ember-text-field').extend({
         Ember.assert('No create method set on superfield type.', create);
         this.hideSelector();
         create.call(type, this.get('inputValue'), function(value) {
-            self.set('value', value);
+            self.selectOption(value);
         });
-        this.set('inputValue', '');
-        this.set('value', null);
     }
 });
 
