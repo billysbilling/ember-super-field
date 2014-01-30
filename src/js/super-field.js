@@ -258,7 +258,9 @@ module.exports = require('ember-text-field').extend({
     },
     selectOption: function(option) {
         this.set('value', option);
-        this.sendAction('didSelect', option);
+        Em.run.schedule('sync', this, function() {
+            this.sendAction('didSelect', option);
+        });
     },
 
 
