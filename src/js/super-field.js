@@ -257,10 +257,13 @@ module.exports = require('ember-text-field').extend({
         }
     },
     selectOption: function(option) {
+        var didChange = (option || null) !== (this.get('value') || null);
         this.set('value', option);
-        Em.run.schedule('sync', this, function() {
-            this.sendAction('didSelect', option);
-        });
+        if (didChange) {
+            Em.run.schedule('sync', this, function() {
+                this.sendAction('didSelect', option);
+            });
+        }
     },
 
 
