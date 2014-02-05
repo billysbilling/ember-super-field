@@ -25,7 +25,7 @@ module.exports = Em.Object.extend(Em.Evented, {
     
     noOptionsFoundText: t('no_options_found'),
     optionHeight: 27,
-    optionViewClass: require('../option-view'),
+    optionViewClass: require('../lazy-option-view'),
 
     q: null
 });

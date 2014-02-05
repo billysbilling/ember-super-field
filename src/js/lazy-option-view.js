@@ -1,0 +1,1 @@
+module.exports = require('ember-lazy-list').LazyItemView.extend(require('./option-view-mixin'));

@@ -115,7 +115,9 @@ module.exports = require('ember-popover').extend({
         field.selectOption(option);
     },
     
-    listViewClass: require('./list-view'),
+    listViewClass: function() {
+        return require('ember-lazy-list').LazyItemView.detect(this.get('type.optionViewClass')) ? require('./lazy-list-view') : require('./list-view');
+    }.property('type.optionViewClass'),
 
     createViewClass: require('./create-view')
 });
