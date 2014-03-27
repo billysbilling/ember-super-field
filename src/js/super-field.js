@@ -1,4 +1,5 @@
-var i18nContext = require('./i18n-context'),
+var functionProxy = require('function-proxy'),
+    i18nContext = require('./i18n-context'),
     t = i18nContext.t,
     BasicType = require('./types/basic');
 
@@ -145,7 +146,7 @@ module.exports = require('ember-text-field').extend({
     didInsertElement: function() {
         this._super();
         var input = this.$('input');
-        input.keydown(Billy.proxy(this.didKeyDown, this));
+        input.keydown(functionProxy(this.didKeyDown, this));
     },
     willDestroyElement: function() {
         this._super();
