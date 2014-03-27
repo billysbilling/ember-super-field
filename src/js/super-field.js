@@ -5,7 +5,7 @@ var i18nContext = require('./i18n-context'),
 module.exports = require('ember-text-field').extend({
     classNames: ['super-field'],
 
-    classNameBindings: ['hasStringValue', 'hasStringValue:has-value'],
+    classNameBindings: ['hasStringValue', 'hasStringValue:has-value', 'hasStringValueClass'],
 
     autocomplete: 'off',
 
@@ -50,11 +50,21 @@ module.exports = require('ember-text-field').extend({
     }.observes('record').on('init'),
 
     allowStringValue: false,
+    hasStringValueClass: null,
     stringName: null,
     stringValue: '',
     hasStringValue: function() {
         return (this.get('stringValue') && !this.get('hasFocus'));
     }.property('hasFocus', 'stringValue'),
+
+    stringValueDidChange: function() {
+        if (this.get('allowStringValue') === true) {
+            var stringValue = this.get('stringValue');
+            if (stringValue) {
+                this.set('inputValue', stringValue);
+            }
+        }
+    }.observes('stringValue').on('init'),
 
     autoSelectIfOne: false,
 
@@ -103,7 +113,7 @@ module.exports = require('ember-text-field').extend({
     superFieldValueDidChange: function() {
         if (this.get('value')) {
             this.set('stringValue', null);
-        } else {
+        } else if (!this.get('stringValue')) {
             this.set('inputValue', '');
         }
     }.observes('value'),
