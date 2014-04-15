@@ -5,10 +5,10 @@ module.exports = require('ember-popover').extend({
     
     classNameBindings: ['type.create:has-create'],
 
-    minHeight: 100,
-    
+    minHeight: 50,
+
     maxHeight: 300,
-    
+
     minWidth: Em.computed.alias('type.selectorMinWidth'),
     
     field: null,
