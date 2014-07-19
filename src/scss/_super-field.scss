@@ -17,7 +17,7 @@
         &.above {
             &.has-create {
                 .notch {
-                    border-top-color: $background-gray;
+                    border-top-color: $blue-gray-xxlight;
                 }
             }
         }
@@ -33,7 +33,7 @@
 
             cursor: pointer;
             padding: $option-padding;
-            border-bottom: 1px solid $background-gray;
+            border-bottom: 1px solid $blue-gray-xxlight;
 
             &:last-of-type {
                 border-bottom-color: #fff;
@@ -81,8 +81,8 @@
         .create {
             cursor: pointer;
             padding:  0px 5px;
-            background: $background-gray;
-            border-top: 1px solid $border-gray;
+            background: $blue-gray-xxlight;
+            border-top: 1px solid $blue-gray-xlight;
             @include border-bottom-radius(2px);
 
             svg {
