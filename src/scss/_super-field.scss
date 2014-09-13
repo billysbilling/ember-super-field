@@ -48,18 +48,18 @@
             }
 
             .name {
-                @include ellipsis;
+                text-overflow: ellipsis;
                 line-height: $tight-line-height;
                 height: $tight-line-height;
             }
 
             .meta {
-                @include ellipsis;
+                text-overflow: ellipsis;
                 color: $blue-gray;
                 @include small-font;
                 line-height: $small-tight-line-height;
                 height: $small-tight-line-height;
-                @include ellipsis;
+                text-overflow: ellipsis;
             }
 
             .image {
@@ -83,7 +83,8 @@
             padding:  0px 5px;
             background: $background-gray;
             border-top: 1px solid $border-gray;
-            @include border-bottom-radius(2px);
+            border-bottom-left-radius: 2px;
+            border-bottom-right-radius: 2px;
 
             svg {
                 float: left;
