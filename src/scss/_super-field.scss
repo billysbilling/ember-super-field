@@ -48,9 +48,11 @@
             }
 
             .name {
-                text-overflow: ellipsis;
                 line-height: $tight-line-height;
                 height: $tight-line-height;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
             }
 
             .meta {
@@ -60,6 +62,8 @@
                 line-height: $small-tight-line-height;
                 height: $small-tight-line-height;
                 text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
             }
 
             .image {
