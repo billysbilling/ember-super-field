@@ -1,8 +1,12 @@
-module.exports = require('ember-popover').extend({
+var Popover = require('ember-popover');
+
+module.exports = Popover.extend({
+    layout: Popover.proto().layout,
+
     template: require('../templates/selector'),
-    
+
     classNames: ['super-field-selector'],
-    
+
     classNameBindings: ['type.create:has-create'],
 
     minHeight: 0,
@@ -10,13 +14,13 @@ module.exports = require('ember-popover').extend({
     maxHeight: 300,
 
     minWidth: Em.computed.alias('type.selectorMinWidth'),
-    
+
     field: null,
-    
+
     type: Ember.computed.alias('field.type'),
 
     highlightedOption: null,
-    
+
     createIsHighlighted: false,
 
     mouseDown: function(e) {
@@ -30,21 +34,21 @@ module.exports = require('ember-popover').extend({
         }
         this.advanceHighlightedOption(-1);
     },
-    
+
     didPressDown: function() {
         if (this.get('createIsHighlighted')) {
             return;
         }
         this.advanceHighlightedOption(1);
     },
-    
+
     advanceHighlightedOption: function(delta) {
         var content = this.get('type.content'),
             highlightedOption = this.get('highlightedOption'),
             highlightedIndex = highlightedOption ? content.indexOf(highlightedOption) : -1;
         this.highlightOptionByIndex(highlightedIndex + delta);
     },
-    
+
     highlightOptionByIndex: function(newIndex) {
         var self = this,
             content = this.get('type.content'),
@@ -78,7 +82,7 @@ module.exports = require('ember-popover').extend({
             this.set('createIsHighlighted', true);
         }
     },
-    
+
     scrollOptionIntoView: function() {
         if (this.get('isDestroying')) {
             return;
@@ -99,7 +103,7 @@ module.exports = require('ember-popover').extend({
             list.scrollTop(optionBottom - listHeight);
         }
     },
-    
+
     didPressEnter: function() {
         if (this.get('createIsHighlighted')) {
             this.get('field').create();
@@ -108,13 +112,13 @@ module.exports = require('ember-popover').extend({
             this.selectOption(highlightedOption);
         }
     },
-    
+
     selectOption: function(option) {
         var field = this.get('field');
         field.hideSelector();
         field.selectOption(option);
     },
-    
+
     listViewClass: function() {
         return require('ember-lazy-list').LazyItemView.detect(this.get('type.optionViewClass')) ? require('./lazy-list-view') : require('./list-view');
     }.property('type.optionViewClass'),
