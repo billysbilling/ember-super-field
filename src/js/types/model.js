@@ -60,6 +60,10 @@ module.exports = require('./basic').extend({
             content.destroy();
         }
     },
+    
+    fieldQueryDidChange: function() {
+        this.resetContent()
+    }.observes('field.query'),
 
     isLoaded: Em.computed.alias('content.isLoaded'),
 
