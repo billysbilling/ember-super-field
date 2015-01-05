@@ -1,6 +1,6 @@
 {
   "name": "ember-super-field",
-  "version": "1.6.7",
+  "version": "1.6.8",
   "homepage": "https://github.com/billysbilling/ember-super-field",
   "main": "src/js/super-field.js",
   "billy-builder": {
