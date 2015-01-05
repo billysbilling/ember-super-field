@@ -16,8 +16,8 @@ module.exports = require('./basic').extend({
         if (instant || BD.store.allOfTypeIsLoaded(this.get('modelClass'))) {
             this.updateContent();
         } else {
-            clearTimeout(this._updateContentTimeout);
-            this._updateContentTimeout = setTimeout(this.updateContent.bind(this), 200);
+            Em.run.cancel(this._updateContentTimeout)
+            this._updateContentTimeout = Em.run.later(this, this.updateContent, 200);
         }
     },
     updateContent: function() {
