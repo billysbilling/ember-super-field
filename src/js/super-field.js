@@ -20,7 +20,7 @@ module.exports = require('ember-text-field').extend({
         this._super();
         var self = this;
         this.addObserver('value.'+this.get('type.inputValuePath'), this, function() {
-            self.reformatInputValue();
+            Em.run.once(self, self.reformatInputValue)
         });
         if (this.get('autoSelectIfOne')) {
             var type = this.get('type'),
@@ -184,7 +184,6 @@ module.exports = require('ember-text-field').extend({
         switch (key) {
             case $.keyCode.ESCAPE:
                 this.hideSelector();
-                break;
                 break;
             case $.keyCode.UP:
                 this.didPressUp();
