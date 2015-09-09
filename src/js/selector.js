@@ -109,7 +109,11 @@ module.exports = Popover.extend({
             this.get('field').create();
         } else {
             var highlightedOption = this.get('highlightedOption');
-            this.selectOption(highlightedOption);
+            if (highlightedOption) {
+                this.selectOption(highlightedOption);
+            } else {
+                this.get('field').hideSelector();
+            }
         }
     },
 
