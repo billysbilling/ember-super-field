@@ -1,7 +1,18 @@
 <div class="popover-body list">
     {{#if view.type.isLoaded}}
         {{#if view.type.content.length}}
-            {{collection listViewClass contentBinding="view.type.content" itemViewClass="view.type.optionViewClass"}}
+            {{#if view.type.isGrouped}}
+                {{#each group in view.type.groupedContent}}
+                    <div class="group">
+                        <div class="group-header">{{group.name}}</div>
+                        {{#each item in group.items}}
+                            {{view view.type.optionViewClass content=item selector=view}}
+                        {{/each}}
+                    </div>
+                {{/each}}
+            {{else}}
+                {{collection listViewClass contentBinding="view.type.content" itemViewClass="view.type.optionViewClass"}}
+            {{/if}}
         {{else}}
             <div class="status">{{view.type.noOptionsFoundText}}</div>
         {{/if}}

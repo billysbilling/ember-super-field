@@ -92,13 +92,14 @@ module.exports = Popover.extend({
         if (!option.length) {
             return;
         }
-        var listHeight = list.outerHeight(),
+        var stickyHeaderHeight = this._stickyGroup ? $(this._stickyGroup).find('.group-header').outerHeight() : 0,
+            listHeight = list.outerHeight(),
             scrollTop = list.scrollTop(),
             scrollBottom = scrollTop + listHeight,
             optionTop = option.offset().top - list.offset().top + scrollTop,
             optionBottom = optionTop + option.outerHeight();
-        if (optionTop < scrollTop) {
-            list.scrollTop(optionTop);
+        if (optionTop < scrollTop + stickyHeaderHeight) {
+            list.scrollTop(optionTop - stickyHeaderHeight);
         } else if (optionBottom > scrollBottom) {
             list.scrollTop(optionBottom - listHeight);
         }
@@ -127,5 +128,58 @@ module.exports = Popover.extend({
         return require('ember-lazy-list').LazyItemView.detect(this.get('type.optionViewClass')) ? require('./lazy-list-view') : require('./list-view');
     }.property('type.optionViewClass'),
 
-    createViewClass: require('./create-view')
+    createViewClass: require('./create-view'),
+
+    didInsertElement: function() {
+        this._super()
+        this.$('.list').on('scroll', this.updateStickyGroup.bind(this))
+    },
+
+    _stickyGroup: null,
+
+    _stickyGroupToBottom: null,
+
+    updateStickyGroup: function(e) {
+        var $list = this.$('.list')
+        var listTop = $list.offset().top
+        var groups = this.$('.group')
+        var group
+        var $group
+        var groupTop
+        var groupBottom
+        var headerHeight
+        var found
+        var stickToBottom = false
+        for (var i = 0; i < groups.length; i++) {
+            group = groups[i]
+            $group = $(group)
+            groupTop = $group.offset().top
+            groupBottom = groupTop + $group.outerHeight()
+            headerHeight = $group.find('.group-header').outerHeight()
+            if (listTop >= groupTop && listTop < groupBottom) {
+                found = group
+                if (groupBottom - headerHeight < listTop) {
+                    stickToBottom = true
+                }
+                break
+            }
+        }
+
+        if (this._stickyGroup === found && this._stickyGroupToBottom === stickToBottom) {
+            //Nothing to do
+        } else {
+            $(this._stickyGroup).removeClass('sticky-group')
+            $(this._stickyGroup).removeClass('sticky-group-bottom')
+            $(found).addClass('sticky-group')
+            if (stickToBottom) {
+                $(found).addClass('sticky-group-bottom')
+            }
+            this._stickyGroup = found
+            this._stickyGroupToBottom = stickToBottom
+        }
+    },
+
+    groupedContentDidChange: function() {
+        Em.run.schedule('afterRender', this, this.updateStickyGroup)
+    }.observes('groupedContent')
 });

@@ -299,6 +299,7 @@ module.exports.types = {
 //These are named like this for backwards compatibility. Earlier all option views were lazy
 module.exports.OptionView = require('./lazy-option-view');
 module.exports.NonLazyOptionView = require('./option-view');
+module.exports.GroupedOptionView = require('./grouped-option-view');
 
 module.exports.locale = i18nContext.locale;
 

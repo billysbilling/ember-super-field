@@ -1,4 +1,6 @@
 @mixin super-field {
+    $option-padding: 5px;
+
     .super-field {
         &.has-string-value.super-field-string-value-new {
             input {
@@ -27,9 +29,49 @@
             overflow-x: hidden;
         }
 
+        .group-header {
+            position: relative;
+            z-index: 2;
+            padding: $option-padding;
+            font-weight: 600;
+            background: $blue-gray-xlight;
+            border-top: 1px solid $gray-xlight;
+            border-bottom: 1px solid $gray-xlight;
+            color: $blue-gray-dark;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        //Remove the border-bottom from the last item in each group, since the .group-header has both border top and bottom
+        .group {
+            .option:last-child {
+                border-bottom: none;
+            }
+        }
+
+        .sticky-group {
+            padding-top: $line-height + 2 * 1px + 2 * $option-padding;
+
+            .group-header {
+                position: absolute;
+                top: $standard-border-radius;
+                left: 0;
+                width: 100%;
+            }
+
+            &.sticky-group-bottom {
+                position: relative;
+
+                .group-header {
+                    top: auto;
+                    bottom: -1px; //Avoid having two groups' borders next to each other
+                }
+            }
+        }
+
         .option {
             $image-size: 16px;
-            $option-padding: 5px;
 
             cursor: pointer;
             padding: $option-padding;
