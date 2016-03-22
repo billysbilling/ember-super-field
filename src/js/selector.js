@@ -29,7 +29,7 @@ module.exports = Popover.extend({
 
     didPressUp: function() {
         if (this.get('createIsHighlighted')) {
-            this.highlightOptionByIndex(this.get('type.content.length')-1);
+            this.highlightOptionByIndex(this.get('type.orderedContent.length')-1);
             return;
         }
         this.advanceHighlightedOption(-1);
@@ -43,7 +43,7 @@ module.exports = Popover.extend({
     },
 
     advanceHighlightedOption: function(delta) {
-        var content = this.get('type.content'),
+        var content = this.get('type.orderedContent'),
             highlightedOption = this.get('highlightedOption'),
             highlightedIndex = highlightedOption ? content.indexOf(highlightedOption) : -1;
         this.highlightOptionByIndex(highlightedIndex + delta);
@@ -51,7 +51,7 @@ module.exports = Popover.extend({
 
     highlightOptionByIndex: function(newIndex) {
         var self = this,
-            content = this.get('type.content'),
+            content = this.get('type.orderedContent'),
             length,
             newOption;
         if (!content) {

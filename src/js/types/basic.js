@@ -61,5 +61,16 @@ module.exports = Em.Object.extend(Em.Evented, {
         })
         groupsList.sort(this.groupSort)
         return groupsList
-    }.property('content.@each')
+    }.property('content.@each'),
+
+    orderedContent: function() {
+        if (this.get('isGrouped')) {
+            return this.get('groupedContent').reduce(function(memo, group) {
+                memo = memo.concat(group.items)
+                return memo
+            }, [])
+        } else {
+            return this.get('content')
+        }
+    }.property('isGrouped', 'content', 'groupedContent')
 });
